@@ -1,0 +1,6 @@
+﻿services:
+  authenticator.api:
+    image: authenticator.api
+    build:
+      context: .
+      dockerfile: src/Authenticator.Api/Dockerfile
