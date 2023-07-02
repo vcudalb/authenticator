@@ -1,0 +1,36 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [ "develop" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      build_version: 1.0.${{github.run_number}}
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+          fetch-depth: 0
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build Authenticator.sln  /p:Version=${{env.build_version}} --no-restore
+
+      - name: Build failed
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: BUILD with number ${{env.build_version}} FAILED!
+          webhookUrl: ${{ secrets.DISCORD_BUILDS_WEBHOOK }}
