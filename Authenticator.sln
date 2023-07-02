@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		README.md = README.md
 		docker-compose.yml = docker-compose.yml
+		.github\workflows\build_on_push.yml = .github\workflows\build_on_push.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authenticator.Application", "src\Authenticator.Application\Authenticator.Application.csproj", "{869015BF-C1FB-4014-9407-AB5BE067DD9D}"
