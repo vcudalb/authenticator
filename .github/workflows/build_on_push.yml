@@ -26,6 +26,9 @@ jobs:
 
       - name: Build
         run: dotnet build Authenticator.sln  /p:Version=${{env.build_version}} --no-restore
+        
+      - name: Test with the dotnet CLI
+        run: dotnet test
 
       - name: Build failed
         uses: rjstone/discord-webhook-notify@v1
