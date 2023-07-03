@@ -36,4 +36,12 @@ jobs:
         with:
           severity: error
           details: BUILD with number ${{env.build_version}} FAILED!
-          webhookUrl: ${{ secrets.DISCORD_BUILDS_WEBHOOK }}
+          webhookUrl: ${{ secrets.DISCORD_FAILED_BUILDS_WEBHOOK }}
+          
+      - name: Build passed
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: Build ${{env.build_version}} successfully PASSED!
+          webhookUrl: ${{ secrets.DISCORD_PASSED_BUILDS_WEBHOOK }}
