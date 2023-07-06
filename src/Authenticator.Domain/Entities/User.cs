@@ -7,7 +7,6 @@ namespace Authenticator.Domain.Entities;
 [ExcludeFromCodeCoverage]
 public class User : IdentityUser
 {
-    public string Code { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public DateTime DateOfBirth { get; set; }
@@ -15,8 +14,8 @@ public class User : IdentityUser
     public string Ip { get; set; }
     public DateTimeOffset? LastLogon { get; set; }
 
-    public string? CreatedBy { get; set; }
-    public string? UpdatedBy { get; set; }
+    public string CreatedBy { get; set; }
+    public string UpdatedBy { get; set; }
     public DateTimeOffset? UpdatedOn { get; set; }
     public DateTimeOffset CreatedOn { get; set; } = DateTimeOffset.UtcNow;
     public bool IsActive { get; set; }
