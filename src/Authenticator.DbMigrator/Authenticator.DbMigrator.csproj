@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>b6dfa9b2-6163-44f6-89a6-0a7693060ff3</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,6 +17,20 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Authenticator.Infrastructure\Authenticator.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Duende.IdentityServer.EntityFramework.Storage" Version="6.3.2" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Countries.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
