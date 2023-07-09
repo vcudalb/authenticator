@@ -18,7 +18,16 @@ namespace Authenticator.Api
         /// </param>
         public static async Task Main(string[] args)
         {
-            await CreateHostBuilder(args).Build().RunAsync();
+            try
+            {
+                await CreateHostBuilder(args).Build().RunAsync();
+            }
+            catch (Exception ex) when (
+                ex.GetType().Name is not "StopTheHostException"
+                && ex.GetType().Name is not "HostAbortedException")
+            {
+                Console.WriteLine($"Unhandled exception: {ex.Message}");
+            }
         }
      
         /// <summary>
