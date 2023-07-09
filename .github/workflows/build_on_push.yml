@@ -43,9 +43,7 @@ jobs:
           
       - name: Build passed
         uses: rjstone/discord-webhook-notify@v1
-        if: |
-          success() && 
-          github.event.pull_request.merged == true
+        if: success()
         with:
           severity: info
           details: Build ${{env.build_version}} successfully PASSED!

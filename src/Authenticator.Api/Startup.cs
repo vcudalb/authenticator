@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Authenticator.Api.Extensions;
-using Authenticator.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Authenticator.Api;
