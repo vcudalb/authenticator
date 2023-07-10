@@ -13,13 +13,20 @@ namespace Authenticator.DbMigrator;
 [ExcludeFromCodeCoverage]
 public class Program
 {
-    static async Task Main(string[] args) => await CreateHostBuilder(args).Build().RunAsync();
-
-    /// <summary>
-    ///     Builds the application's host.
-    /// </summary>
-    /// <param name="args">A <see cref="string" />[] representing the application's arguments.</param>
-    /// <returns>An <see cref="IHostBuilder" /> representing the host builder.</returns>
+    static async Task Main(string[] args)
+    {
+        try
+        {
+            await CreateHostBuilder(args).Build().RunAsync();
+        }
+        catch (Exception ex) when (
+            ex.GetType().Name is not "StopTheHostException"
+            && ex.GetType().Name is not "HostAbortedException")
+        {
+            Console.WriteLine($"Unhandled exception: {ex.Message}");
+        }
+    }
+    
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
             .ConfigureServices(services =>
