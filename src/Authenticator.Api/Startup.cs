@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Authenticator.Api.Extensions;
+using Authenticator.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Authenticator.Api;
@@ -50,6 +51,8 @@ namespace Authenticator.Api;
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDuendeIndentityServer(Configuration);
+            services.AddRepositories();
+            services.AddUnitOfWork();
         }
         /// <summary>
         ///  This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

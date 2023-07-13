@@ -49,10 +49,7 @@ public static class Seeds
     {
         if (!context.Clients.Any())
         {
-            foreach (var client in clients)
-            {
-                context.Clients.Add(client.ToEntity());
-            }
+            foreach (var client in clients) context.Clients.Add(client.ToEntity());
 
             context.SaveChanges();
         }
@@ -77,10 +74,7 @@ public static class Seeds
     private static void SeedApiResources(ConfigurationDbContext context, IEnumerable<ApiResource> apiResources)
     {
         if (context.ApiResources.Any()) return;
-        foreach (var apiResource in apiResources)
-        {
-            context.ApiResources.Add(apiResource.ToEntity());
-        }
+        foreach (var apiResource in apiResources) context.ApiResources.Add(apiResource.ToEntity());
 
         context.SaveChanges();
     }
@@ -88,10 +82,7 @@ public static class Seeds
     private static void SeedApiScope(ConfigurationDbContext context, IEnumerable<ApiScope> apiScopes)
     {
         if (context.ApiScopes.Any()) return;
-        foreach (var apiScope in apiScopes)
-        {
-            context.ApiScopes.Add(apiScope.ToEntity());
-        }
+        foreach (var apiScope in apiScopes) context.ApiScopes.Add(apiScope.ToEntity());
 
         context.SaveChanges();
     }

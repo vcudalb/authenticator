@@ -1,5 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Authenticator.Domain.Common;
+using Authenticator.Domain.Repositories.Abstractions;
 using Authenticator.Infrastructure.Persistence.Contexts;
+using Authenticator.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +22,18 @@ public static class PersistenceServiceCollectionExtensions
             options.UseSqlServer(configuration.GetConnectionString("authenticator"),
                 builder => builder.MigrationsAssembly(typeof(AuthenticatorDbContext).Assembly.FullName)));
 
+        return services;
+    }
+
+    public static IServiceCollection AddRepositories(this IServiceCollection services)
+    {
+        services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        return services;
+    }
+
+    public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
+    {
+        services.AddTransient<IUnitOfWork, UnitOfWork>();
         return services;
     }
 }

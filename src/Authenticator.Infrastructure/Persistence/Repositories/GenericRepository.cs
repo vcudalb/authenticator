@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Authenticator.Infrastructure.Persistence.Repositories;
 
-public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
+public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
 {
     protected readonly AuthenticatorDbContext Context;
     protected readonly DbSet<TEntity> DbSet;

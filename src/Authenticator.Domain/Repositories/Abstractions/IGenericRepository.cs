@@ -3,7 +3,7 @@ using Authenticator.Domain.Common;
 
 namespace Authenticator.Domain.Repositories.Abstractions;
 
-public interface IGenericRepository<TEntity> where TEntity : BaseEntity
+public interface IGenericRepository<TEntity> where TEntity : class
 {
     Task<IEnumerable<TEntity>> GetAsync(
         Expression<Func<TEntity, bool>> filter = null,
