@@ -1,6 +1,6 @@
 ﻿namespace Authenticator.Api.Controllers;
 
-public class Country
+public class Country : ApiController
 {
     
 }
