@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Authenticator.Api
 {
@@ -29,13 +27,7 @@ namespace Authenticator.Api
                 Console.WriteLine($"Unhandled exception: {ex.Message}");
             }
         }
-     
-        /// <summary>
-        ///     Runs the application.
-        /// </summary>
-        /// <param name="args">
-        ///     A <see cref="string" />[] representing the application's arguments.
-        /// </param>
+        
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

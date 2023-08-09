@@ -23,7 +23,7 @@ public static class IdentityServerServiceCollectionExtensions
     ///     A <see cref="IConfiguration"/> represents a set of key/value application configuration properties.
     /// </param>
     /// <returns></returns>
-    public static IServiceCollection AddDuendeIndentityServer(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddDuendeIdentityServer(this IServiceCollection services, IConfiguration configuration)
     {
         const string infrastructureAssembly = "Authenticator.Infrastructure";
         string connectionString = configuration.GetConnectionString("authenticator");
