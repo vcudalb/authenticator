@@ -1,6 +1,13 @@
-# Introduction 
+# Repository
+
+[![Develop](https://github.com/vcudalb/authenticator/actions/workflows/build_on_push.yml/badge.svg?branch=develop)](https://github.com/vcudalb/authenticator/actions/workflows/build_on_push.yml)
+
+This repository is of the Authenticator that is maintained by [vcudalb](cudalb.vasile@gmail.com) and licensed under the [MIT License](LICENSE.txt).
+
+# Authenticator
 The **Authenticator** solution provides a specialized service designed to efficiently manage various user operations and facilitate the generation of secure tokens. 
 This dedicated component plays a crucial role by handling all clients-related functionalities and ensuring the seamless creation and validation of tokens.
+
 
 # Getting Started
 ## Prerequisites
