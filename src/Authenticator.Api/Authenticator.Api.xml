@@ -9,6 +9,54 @@
             Base controller, used for setting common attributes shared with nested controllers.
             </summary>
         </member>
+        <member name="T:Authenticator.Api.Controllers.AuthenticatorController">
+            <summary>
+            Provides authenticators' operation and process handling.
+            </summary>
+        </member>
+        <member name="M:Authenticator.Api.Controllers.AuthenticatorController.#ctor(MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{Authenticator.Api.Controllers.AuthenticatorController})">
+            <summary>
+            Constructs a new instance of the <see cref="T:Authenticator.Api.Controllers.AuthenticatorController"/> representing authenticators controller used to manage tokens, users, etc.
+            </summary>
+            <param name="mediator">
+            An instance of the <see cref="T:MediatR.IMediator"/> representing the request and response handler.
+            </param>
+            <param name="logger">
+            An instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> representing the authenticators controller's logger.
+            </param>
+        </member>
+        <member name="T:Authenticator.Api.Controllers.CountriesController">
+            <summary>
+            Provides countries' operation and process handling.
+            </summary>
+        </member>
+        <member name="M:Authenticator.Api.Controllers.CountriesController.#ctor(MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{Authenticator.Api.Controllers.CountriesController})">
+            <summary>
+            Constructs a new instance of the <see cref="T:Authenticator.Api.Controllers.CountriesController"/> representing countries controller used to manage tokens, users, etc.
+            </summary>
+            <param name="mediator">
+            An instance of the <see cref="T:MediatR.IMediator"/> representing the request and response handler.
+            </param>
+            <param name="logger">
+            An instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> representing the countries controller's logger.
+            </param>
+        </member>
+        <member name="T:Authenticator.Api.Controllers.UsersController">
+            <summary>
+            Provides users' operation and process handling.
+            </summary>
+        </member>
+        <member name="M:Authenticator.Api.Controllers.UsersController.#ctor(MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{Authenticator.Api.Controllers.UsersController})">
+            <summary>
+            Constructs a new instance of the <see cref="T:Authenticator.Api.Controllers.UsersController"/> representing users controller used to manage tokens, users, etc.
+            </summary>
+            <param name="mediator">
+            An instance of the <see cref="T:MediatR.IMediator"/> representing the request and response handler.
+            </param>
+            <param name="logger">
+            An instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> representing the users controller's logger.
+            </param>
+        </member>
         <member name="T:Authenticator.Api.Extensions.IdentityServerServiceCollectionExtensions">
             <summary>
                 Provides extension methods for configuring identity server.
