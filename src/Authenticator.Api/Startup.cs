@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 using Authenticator.Api.Extensions;
-using Authenticator.Domain.Entities;
+using Authenticator.Application.DTOs.Countries;
 using Authenticator.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
@@ -40,6 +39,7 @@ public class Startup
     /// </param>
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddControllers();
         services.AddLogging();
         services.AddDuendeIdentityServer(Configuration);
         services.AddRepositories();
@@ -48,7 +48,7 @@ public class Startup
         services.AddSwaggerDependencies();
         services.AddAuthorization();
 
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Country).Assembly));
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CountryDto).Assembly));
     }
 
     /// <summary>
@@ -75,8 +75,7 @@ public class Startup
         {
             foreach (var description in provider.ApiVersionDescriptions)
             {
-                setupAction.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
-                    description.GroupName.ToUpperInvariant());
+                setupAction.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
                 setupAction.RoutePrefix = "swagger";
             }
         });
@@ -87,6 +86,11 @@ public class Startup
             .AllowAnyHeader()
             .SetIsOriginAllowed(_ => true)
             .AllowCredentials());
+        
         app.UseAuthorization();
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
     }
 }

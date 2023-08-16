@@ -33,8 +33,13 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     /// <param name="options">
     ///      An <see cref="SwaggerGenOptions"/> the options instance to configure.
     /// </param>
-    public void Configure(SwaggerGenOptions options) => _provider.ApiVersionDescriptions.ToList().ForEach(description =>
-        options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description)));
+    public void Configure(SwaggerGenOptions options)
+    {
+        foreach (var description in _provider.ApiVersionDescriptions)
+        {
+            options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
+        }
+    }
 
     private static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description) =>
         GetAuthenticatorApiInfo(ref description);

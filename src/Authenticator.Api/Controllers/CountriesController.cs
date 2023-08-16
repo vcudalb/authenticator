@@ -30,6 +30,11 @@ public class CountriesController : ApiController
         _logger = logger;
     }
 
+    /// <summary>
+    /// Handles creation of the country.
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<ActionResult<Guid>> Create([FromBody] CreateCountryRequest request)
     {
