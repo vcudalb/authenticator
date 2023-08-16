@@ -10,4 +10,14 @@
       <ProjectReference Include="..\Authenticator.Domain\Authenticator.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Countries\Queries\" />
+      <Folder Include="Tokens\Commands\" />
+      <Folder Include="Tokens\Queries\" />
+    </ItemGroup>
+
 </Project>
