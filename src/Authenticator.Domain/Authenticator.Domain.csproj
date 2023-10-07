@@ -8,7 +8,9 @@
 
     <ItemGroup>
       <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.3.2" />
+      <PackageReference Include="FluentValidation" Version="11.7.1" />
     </ItemGroup>
+
 
 
 </Project>
