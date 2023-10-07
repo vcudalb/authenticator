@@ -13,7 +13,7 @@ public static class ValidatorServiceCollectionExtensions
     public static IServiceCollection AddValidators(this IServiceCollection services)
     {
         services.AddTransient(typeof(IValidationFactory), typeof(ValidationFactory));
-        services.AddTransient<IValidator<CreateTokenRequest>, CreateTokenValidator>();
+        services.AddTransient<IValidator<TokenRequest>, TokenValidator>();
 
         return services;
     }
