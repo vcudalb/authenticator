@@ -41,7 +41,7 @@
             An instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> representing the countries controller's logger.
             </param>
         </member>
-        <member name="M:Authenticator.Api.Controllers.CountriesController.Create(Authenticator.Api.Requests.Countries.CreateCountryRequest)">
+        <member name="M:Authenticator.Api.Controllers.CountriesController.Create(Authenticator.Domain.Requests.Countries.CreateCountryRequest)">
             <summary>
             Handles creation of the country.
             </summary>

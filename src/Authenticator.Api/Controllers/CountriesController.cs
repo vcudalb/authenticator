@@ -1,6 +1,6 @@
-﻿using Authenticator.Api.Requests.Countries;
-using Authenticator.Application.Countries.Commands;
+﻿using Authenticator.Application.Countries.Commands;
 using Authenticator.Application.DTOs.Countries;
+using Authenticator.Domain.Requests.Countries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

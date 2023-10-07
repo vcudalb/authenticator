@@ -16,7 +16,6 @@
 
     <ItemGroup>
       <Folder Include="Countries\Queries\" />
-      <Folder Include="Tokens\Commands\" />
       <Folder Include="Tokens\Queries\" />
     </ItemGroup>
 

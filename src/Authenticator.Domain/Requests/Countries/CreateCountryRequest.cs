@@ -1,4 +1,4 @@
-﻿namespace Authenticator.Api.Requests.Countries;
+﻿namespace Authenticator.Domain.Requests.Countries;
 
 public class CreateCountryRequest
 {
