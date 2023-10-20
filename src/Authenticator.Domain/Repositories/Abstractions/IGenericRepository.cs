@@ -25,6 +25,5 @@ public interface IGenericRepository<TEntity> where TEntity : class
     ValueTask DeleteAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default);
     void Delete(TEntity entityToDelete);
     void Update(TEntity entity);
-
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
