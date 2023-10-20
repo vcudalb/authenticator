@@ -1,4 +1,5 @@
-﻿using Authenticator.Infrastructure.Persistence.Contexts;
+﻿using System.Diagnostics.CodeAnalysis;
+using Authenticator.Infrastructure.Persistence.Contexts;
 using Authenticator.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -8,18 +9,16 @@ using FluentAssertions;
 
 namespace Authenticator.UnitTests.Infrastructure.Persistence.Repositories;
 
+[ExcludeFromCodeCoverage]
 public class GenericRepositoryTests
 {
     private readonly DbContextOptions<AuthenticatorDbContext>? _contextOptions =
-        new DbContextOptionsBuilder<AuthenticatorDbContext>()
-            .UseInMemoryDatabase(databaseName: "InMemoryDatabase")
-            .Options;
+        new DbContextOptionsBuilder<AuthenticatorDbContext>().UseInMemoryDatabase(databaseName: "InMemoryDatabase").Options;
 
     [Fact]
     public async Task GetAsync_WithFilter_ReturnsAllEntities()
     {
         // Arrange
-
         await using var dbContext = new AuthenticatorDbContext(_contextOptions);
         await EnsureCleanContextAsync(dbContext);
 

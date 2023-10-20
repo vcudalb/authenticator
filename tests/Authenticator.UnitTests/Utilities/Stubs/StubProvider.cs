@@ -1,8 +1,9 @@
-﻿using System.Security.Authentication;
+﻿using System.Diagnostics.CodeAnalysis;
 using Authenticator.Domain.Entities;
 
 namespace Authenticator.UnitTests.Utilities.Stubs;
 
+[ExcludeFromCodeCoverage]
 public static class StubProvider
 {
     public static List<Address> GetStubAddresses() => new List<Address>

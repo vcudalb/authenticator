@@ -1,5 +1,8 @@
-﻿namespace Authenticator.Domain.Requests.Countries;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Authenticator.Domain.Requests.Countries;
+
+[ExcludeFromCodeCoverage]
 public class CreateCountryRequest
 {
     public string Code { get; set; }

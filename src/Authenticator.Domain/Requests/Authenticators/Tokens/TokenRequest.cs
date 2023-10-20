@@ -1,5 +1,8 @@
-﻿namespace Authenticator.Domain.Requests.Authenticators.Tokens;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Authenticator.Domain.Requests.Authenticators.Tokens;
+
+[ExcludeFromCodeCoverage]
 public class TokenRequest
 {
     public string UserName { get; set; }

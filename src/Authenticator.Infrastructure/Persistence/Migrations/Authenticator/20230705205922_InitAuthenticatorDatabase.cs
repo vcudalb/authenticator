@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Authenticator.Infrastructure.Persistence.Migrations.Authenticator
 {
+    [ExcludeFromCodeCoverage]
     /// <inheritdoc />
     public partial class InitAuthenticatorDatabase : Migration
     {

@@ -1,4 +1,5 @@
-﻿using Authenticator.Domain.Entities;
+﻿using System.Diagnostics.CodeAnalysis;
+using Authenticator.Domain.Entities;
 using Authenticator.Infrastructure.Persistence.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace Authenticator.Infrastructure.Persistence.Contexts;
 /// <summary>
 ///     Provides authenticator db context configurations and db sets.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class AuthenticatorDbContext : IdentityDbContext<User, IdentityRole, string>
 {
     /// <summary>
