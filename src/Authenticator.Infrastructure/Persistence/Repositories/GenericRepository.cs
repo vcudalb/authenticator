@@ -33,15 +33,35 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
             ? await orderBy(query).ToListAsync(cancellationToken)
             : await query.ToListAsync(cancellationToken);
     }
+    
+    public async Task<IEnumerable<TEntity>> GetAsNoTrackingAsync(
+        Expression<Func<TEntity, bool>> filter = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+        string includeProperties = "",
+        CancellationToken cancellationToken = default)
+    {
+        IQueryable<TEntity> query = DbSet.AsNoTracking();
+        if (filter is not null) query = query.Where(filter);
+        query = includeProperties
+            .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
-    public async ValueTask<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default) =>
-        await DbSet.FindAsync(id, cancellationToken);
+        return orderBy is not null
+            ? await orderBy(query).ToListAsync(cancellationToken)
+            : await query.ToListAsync(cancellationToken);
+    }
+
+    public async ValueTask<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default) =>
+        await DbSet.FirstOrDefaultAsync(filter, cancellationToken);
+    
+    public async ValueTask<TEntity> GetFirstAsNoTrackingAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default) =>
+        await DbSet.AsNoTracking().FirstOrDefaultAsync(filter, cancellationToken);
 
     public async ValueTask InsertAsync(TEntity entity, CancellationToken cancellationToken = default) =>
         await DbSet.AddAsync(entity, cancellationToken);
 
-    public async ValueTask DeleteAsync(object id, CancellationToken cancellationToken = default) =>
-        Delete(await DbSet.FindAsync(id, cancellationToken));
+    public async ValueTask DeleteAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default) =>
+        Delete(await DbSet.FirstAsync(filter, cancellationToken));
 
     public void Delete(TEntity entityToDelete)
     {

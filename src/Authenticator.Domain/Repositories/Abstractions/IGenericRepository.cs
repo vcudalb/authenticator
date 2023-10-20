@@ -11,10 +11,18 @@ public interface IGenericRepository<TEntity> where TEntity : class
         IOrderedQueryable<TEntity>> orderBy = null,
         string includeProperties = "",
         CancellationToken cancellationToken = default);
+    
+    Task<IEnumerable<TEntity>> GetAsNoTrackingAsync(
+        Expression<Func<TEntity, bool>> filter = null,
+        Func<IQueryable<TEntity>,
+            IOrderedQueryable<TEntity>> orderBy = null,
+        string includeProperties = "",
+        CancellationToken cancellationToken = default);
 
-    ValueTask<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default);
+    ValueTask<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default);
+    ValueTask<TEntity> GetFirstAsNoTrackingAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default);
     ValueTask InsertAsync(TEntity entity, CancellationToken cancellationToken = default);
-    ValueTask DeleteAsync(object id, CancellationToken cancellationToken = default);
+    ValueTask DeleteAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default);
     void Delete(TEntity entityToDelete);
     void Update(TEntity entity);
 
