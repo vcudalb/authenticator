@@ -27,9 +27,20 @@
         </member>
         <member name="M:Authenticator.Api.Controllers.AuthenticatorController.TokenAsync(Authenticator.Domain.Requests.Authenticators.Tokens.TokenRequest)">
             <summary>
-            Handles token process.
+            Handles creation of the token.
             </summary>
-            <param name="request"></param>
+            <param name="request">
+            An instance of the <see cref="T:Authenticator.Domain.Requests.Authenticators.Tokens.TokenRequest"/>
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Authenticator.Api.Controllers.AuthenticatorController.EnlistAsync(Authenticator.Domain.Requests.Authenticators.Tokens.EnlistRequest)">
+            <summary>
+            Handles enlist process.
+            </summary>
+            <param name="request">
+            An instance of the <see cref="T:Authenticator.Domain.Requests.Authenticators.Tokens.TokenRequest"/>
+            </param>
             <returns></returns>
         </member>
         <member name="T:Authenticator.Api.Controllers.CountriesController">

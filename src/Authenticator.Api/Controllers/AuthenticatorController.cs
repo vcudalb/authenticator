@@ -30,15 +30,31 @@ public class AuthenticatorController : ApiController
     }
 
     /// <summary>
-    /// Handles token process.
+    /// Handles creation of the token.
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="request">
+    /// An instance of the <see cref="TokenRequest"/>
+    /// </param>
     /// <returns></returns>
     [HttpPost("token")]
     [Consumes("application/x-www-form-urlencoded")]
     public async Task<IActionResult> TokenAsync([FromForm] TokenRequest request)
     {
         var token = await _mediator.Send(new CreateTokenCommand(request));
+        return Created(nameof(TokenAsync), token);
+    }
+    
+    /// <summary>
+    /// Handles enlist process.
+    /// </summary>
+    /// <param name="request">
+    /// An instance of the <see cref="TokenRequest"/>
+    /// </param>
+    /// <returns></returns>
+    [HttpPost("enlist")]
+    public async Task<IActionResult> EnlistAsync([FromBody] EnlistRequest request)
+    {
+        var token = await _mediator.Send(new CreateEnlistCommand(request));
         return Created(nameof(TokenAsync), token);
     }
 }
