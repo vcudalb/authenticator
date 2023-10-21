@@ -31,7 +31,6 @@ public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
             }
         }
 
-        context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant,
-            "The username and password do not match", null);
+        context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "The username and password do not match");
     }
 }

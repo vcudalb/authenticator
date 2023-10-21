@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using Authenticator.Domain.Common;
 using Authenticator.Domain.Repositories.Abstractions;
 using Authenticator.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;

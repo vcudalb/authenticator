@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using Authenticator.Application.Tokens.Commands;
+using Authenticator.Domain.Requests.Authenticators.Tokens;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authenticator.Api.Controllers;
@@ -25,5 +27,18 @@ public class AuthenticatorController : ApiController
     {
         _mediator = mediator;
         _logger = logger;
+    }
+
+    /// <summary>
+    /// Handles token process.
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [HttpPost("token")]
+    [Consumes("application/x-www-form-urlencoded")]
+    public async Task<IActionResult> TokenAsync([FromForm] TokenRequest request)
+    {
+        var token = await _mediator.Send(new CreateTokenCommand(request));
+        return Created(nameof(TokenAsync), token);
     }
 }

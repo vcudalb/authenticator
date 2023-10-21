@@ -25,6 +25,13 @@
             An instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> representing the authenticators controller's logger.
             </param>
         </member>
+        <member name="M:Authenticator.Api.Controllers.AuthenticatorController.TokenAsync(Authenticator.Domain.Requests.Authenticators.Tokens.TokenRequest)">
+            <summary>
+            Handles token process.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
         <member name="T:Authenticator.Api.Controllers.CountriesController">
             <summary>
             Provides countries' operation and process handling.

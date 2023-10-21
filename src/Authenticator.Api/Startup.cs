@@ -1,6 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using Authenticator.Api.Extensions;
-using Authenticator.Application.DTOs.Countries;
+using Authenticator.Application.IdentityServer.Extensions;
+using Authenticator.Application.Tokens.Commands;
+using Authenticator.Domain.Validation.Extensions;
 using Authenticator.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
@@ -42,13 +45,15 @@ public class Startup
         services.AddControllers();
         services.AddLogging();
         services.AddDuendeIdentityServer(Configuration);
+        services.AddIdentityServerDependencies();
         services.AddRepositories();
         services.AddUnitOfWork();
+        services.AddValidators();
 
         services.AddSwaggerDependencies();
         services.AddAuthorization();
-
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CountryDto).Assembly));
+        
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateTokenCommandHandler).GetTypeInfo().Assembly));
     }
 
     /// <summary>

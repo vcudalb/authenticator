@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Authenticator.Application.IdentityServer.ServiceProviders;
 using Authenticator.Domain.Entities;
 using Authenticator.Infrastructure.Persistence.Contexts;
-using Duende.IdentityServer.AspNetIdentity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,12 +23,14 @@ public static class IdentityServerServiceCollectionExtensions
     ///     A <see cref="IConfiguration"/> represents a set of key/value application configuration properties.
     /// </param>
     /// <returns></returns>
-    public static IServiceCollection AddDuendeIdentityServer(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddDuendeIdentityServer(this IServiceCollection services,
+        IConfiguration configuration)
     {
         const string infrastructureAssembly = "Authenticator.Infrastructure";
         string connectionString = configuration.GetConnectionString("authenticator");
         services.AddDbContext<AuthenticatorDbContext>(options =>
-            options.UseSqlServer(connectionString,  m => m.MigrationsAssembly(infrastructureAssembly).EnableRetryOnFailure()));
+            options.UseSqlServer(connectionString,
+                m => m.MigrationsAssembly(infrastructureAssembly).EnableRetryOnFailure()));
         services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
@@ -62,9 +64,9 @@ public static class IdentityServerServiceCollectionExtensions
             {
                 options.ConfigureDbContext = builder =>
                     builder.UseSqlServer(connectionString, m => m.MigrationsAssembly(infrastructureAssembly));
-            });
-        //.AddProfileService<ProfileService>()
-        //.AddResourceOwnerValidator<ResourceOwnerPasswordValidator>();
+            })
+            .AddProfileService<ProfileService>()
+            .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>();
 
         return services;
     }
