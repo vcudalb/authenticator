@@ -6,14 +6,18 @@ using System.Linq.Expressions;
 using Authenticator.Domain.Entities;
 using Authenticator.UnitTests.Utilities.Stubs;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Authenticator.UnitTests.Infrastructure.Persistence.Repositories;
 
 [ExcludeFromCodeCoverage]
 public class GenericRepositoryTests
 {
-    private readonly DbContextOptions<AuthenticatorDbContext>? _contextOptions =
+    private static readonly DbContextOptions<AuthenticatorDbContext>? _contextOptions =
         new DbContextOptionsBuilder<AuthenticatorDbContext>().UseInMemoryDatabase(databaseName: "InMemoryDatabase").Options;
+
+    private readonly IDbContextFactory<AuthenticatorDbContext> _contextFactory =
+        new PooledDbContextFactory<AuthenticatorDbContext>(_contextOptions);
 
     [Fact]
     public async Task GetAsync_WithFilter_ReturnsAllEntities()
@@ -22,7 +26,7 @@ public class GenericRepositoryTests
         await using var dbContext = new AuthenticatorDbContext(_contextOptions);
         await EnsureCleanContextAsync(dbContext);
 
-        var repository = new GenericRepository<Address>(dbContext);
+        var repository = new GenericRepository<Address>(_contextFactory);
         var stubAddresses = StubProvider.GetStubAddresses();
 
         dbContext.AddRange(stubAddresses);
@@ -46,7 +50,7 @@ public class GenericRepositoryTests
         await using var dbContext = new AuthenticatorDbContext(_contextOptions);
         await EnsureCleanContextAsync(dbContext);
 
-        var repository = new GenericRepository<Address>(dbContext);
+        var repository = new GenericRepository<Address>(_contextFactory);
         Expression<Func<Address, bool>> filter = x => x.IsActive;
 
         var stubAddresses = StubProvider.GetStubAddresses();
@@ -71,7 +75,7 @@ public class GenericRepositoryTests
         await using var dbContext = new AuthenticatorDbContext(_contextOptions);
         await EnsureCleanContextAsync(dbContext);
 
-        var repository = new GenericRepository<Address>(dbContext);
+        var repository = new GenericRepository<Address>(_contextFactory);
         var stubEntity = StubProvider.GetStubAddress();
 
         // Act
@@ -80,23 +84,6 @@ public class GenericRepositoryTests
 
         // Assert
         dbContext.Addresses.Should().HaveCount(1);
-    }
-
-    [Fact]
-    public async Task InsertAsync_NoSaveChanges_InsertSkipped()
-    {
-        // Arrange
-        await using var dbContext = new AuthenticatorDbContext(_contextOptions);
-        await EnsureCleanContextAsync(dbContext);
-
-        var repository = new GenericRepository<Address>(dbContext);
-        var stubEntity = StubProvider.GetStubAddress();
-
-        // Act
-        await repository.InsertAsync(stubEntity);
-
-        // Assert
-        dbContext.Addresses.Should().HaveCount(0);
     }
 
     [Fact]
@@ -106,7 +93,7 @@ public class GenericRepositoryTests
         await using var dbContext = new AuthenticatorDbContext(_contextOptions);
         await EnsureCleanContextAsync(dbContext);
 
-        var repository = new GenericRepository<Address>(dbContext);
+        var repository = new GenericRepository<Address>(_contextFactory);
         var stubEntity = StubProvider.GetStubAddress();
 
         dbContext.AddRange(stubEntity);
@@ -119,28 +106,8 @@ public class GenericRepositoryTests
         // Assert
         dbContext.Addresses.Should().HaveCount(0);
     }
-    
-    [Fact]
-    public async Task DeleteAsync_NoSaveChanges_SkipRemovalOfTheEntity()
-    {
-        // Arrange
-        await using var dbContext = new AuthenticatorDbContext(_contextOptions);
-        await EnsureCleanContextAsync(dbContext);
 
-        var repository = new GenericRepository<Address>(dbContext);
-        var stubEntity = StubProvider.GetStubAddress();
-
-        dbContext.AddRange(stubEntity);
-        await dbContext.SaveChangesAsync();
-        
-        // Act
-        await repository.DeleteAsync(a => a.City == stubEntity.City);
-
-        // Assert
-        dbContext.Addresses.Should().HaveCount(1);
-    }
-
-    private async Task EnsureCleanContextAsync(DbContext dbContext)
+    private async Task EnsureCleanContextAsync(AuthenticatorDbContext dbContext)
     {
         await dbContext.Database.EnsureDeletedAsync();
         await dbContext.Database.EnsureCreatedAsync();

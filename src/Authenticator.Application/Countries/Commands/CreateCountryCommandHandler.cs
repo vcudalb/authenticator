@@ -17,7 +17,6 @@ public class CreateCountryCommandHandler : IRequestHandler<CreateCountryCommand,
     {
         Address addressEntity = new();
         await _unitOfWork.AddressRepository.InsertAsync(addressEntity, cancellationToken);
-        await _unitOfWork.AddressRepository.SaveChangesAsync(cancellationToken);
 
         return addressEntity.Id;
     }

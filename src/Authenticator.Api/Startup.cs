@@ -46,6 +46,8 @@ public class Startup
         services.AddLogging();
         services.AddDuendeIdentityServer(Configuration);
         services.AddIdentityServerDependencies();
+
+        services.AddSqlServerServices(Configuration);
         services.AddRepositories();
         services.AddUnitOfWork();
         services.AddValidators();
