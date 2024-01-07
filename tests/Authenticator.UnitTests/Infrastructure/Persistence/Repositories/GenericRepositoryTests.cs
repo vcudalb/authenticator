@@ -17,7 +17,7 @@ public class GenericRepositoryTests
         new DbContextOptionsBuilder<AuthenticatorDbContext>().UseInMemoryDatabase(databaseName: "InMemoryDatabase").Options;
 
     private readonly IDbContextFactory<AuthenticatorDbContext> _contextFactory =
-        new PooledDbContextFactory<AuthenticatorDbContext>(_contextOptions);
+        new PooledDbContextFactory<AuthenticatorDbContext>(_contextOptions ?? throw new InvalidOperationException());
 
     [Fact]
     public async Task GetAsync_WithFilter_ReturnsAllEntities()
@@ -107,7 +107,7 @@ public class GenericRepositoryTests
         dbContext.Addresses.Should().HaveCount(0);
     }
 
-    private async Task EnsureCleanContextAsync(AuthenticatorDbContext dbContext)
+    private static async Task EnsureCleanContextAsync(AuthenticatorDbContext dbContext)
     {
         await dbContext.Database.EnsureDeletedAsync();
         await dbContext.Database.EnsureCreatedAsync();

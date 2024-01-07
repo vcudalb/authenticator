@@ -57,7 +57,7 @@ public class Startup
         
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateTokenCommandHandler).GetTypeInfo().Assembly));
     }
-
+    
     /// <summary>
     ///  This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     /// </summary>

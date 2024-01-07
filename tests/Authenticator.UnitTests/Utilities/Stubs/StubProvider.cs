@@ -6,12 +6,11 @@ namespace Authenticator.UnitTests.Utilities.Stubs;
 [ExcludeFromCodeCoverage]
 public static class StubProvider
 {
-    public static List<Address> GetStubAddresses() => new List<Address>
+    public static List<Address> GetStubAddresses() => new()
     {
         new Address { IsActive = true, City = "Chisinau" },
         new Address { IsActive = false, City = "Iasi" },
     };
 
-    public static Address GetStubAddress(bool isActive = true, string city = "Chisinau") =>
-        new Address { City = city, IsActive = isActive };
+    public static Address GetStubAddress(bool isActive = true, string city = "Chisinau") => new() { City = city, IsActive = isActive };
 }
