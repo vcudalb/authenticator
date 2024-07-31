@@ -3,6 +3,7 @@ using Authenticator.Application.IdentityServer.ServiceProviders.Abstractions;
 using Authenticator.Domain.Requests.Authenticators.Tokens;
 using Authenticator.Domain.Responses.Authenticators.Tokens;
 using Authenticator.Domain.Validation.Abstractions;
+using Authenticator.Domain.Validation.GlobalExceptionHandlers.Exceptions;
 using FluentValidation;
 using MediatR;
 
@@ -12,6 +13,12 @@ public class CreateTokenCommandHandler : IRequestHandler<CreateTokenCommand, Tok
 {
     private readonly ITokenService _tokenService;
     private readonly IValidationFactory _validationFactory;
+    
+    /// <summary>
+    /// Constructs a new instance of <see cref="CreateTokenCommandHandler"/>
+    /// </summary>
+    /// <param name="tokenService"></param>
+    /// <param name="validationFactory"></param>
     public CreateTokenCommandHandler(ITokenService tokenService, IValidationFactory validationFactory)
     {
         _tokenService = tokenService;
@@ -21,7 +28,7 @@ public class CreateTokenCommandHandler : IRequestHandler<CreateTokenCommand, Tok
     public async Task<TokenResponse> Handle(CreateTokenCommand command, CancellationToken cancellationToken = default)
     {
         var validationResult = await _validationFactory.GetValidator<IValidator<TokenRequest>>().ValidateAsync(command.Request, cancellationToken);
-        if (!validationResult.IsValid) throw new ValidationException(validationResult.Errors);
+        if (!validationResult.IsValid) throw new BadRequestException(validationResult.Errors.FirstOrDefault()?.ErrorMessage);
 
         return await _tokenService.GetTokenAsync(Map(command.Request));
     }

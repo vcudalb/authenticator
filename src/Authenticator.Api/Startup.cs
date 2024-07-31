@@ -42,6 +42,7 @@ public class Startup
     /// </param>
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddGlobalExceptionHandlers();
         services.AddControllers();
         services.AddLogging();
         services.AddDuendeIdentityServer(Configuration);
@@ -76,7 +77,26 @@ public class Startup
         {
             app.UseDeveloperExceptionPage();
         }
-
+        app.UseExceptionHandler();
+        // app.Use(async (context, next) =>
+        // {
+        //     try
+        //     {
+        //         await next();
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         var handlers = context.RequestServices.GetServices<IExceptionHandler>();
+        //         foreach (var handler in handlers)
+        //         {
+        //             if (await handler.TryHandleAsync(context, ex, context.RequestAborted))
+        //             {
+        //                 return;
+        //             }
+        //         }
+        //         throw; // rethrow if not handled
+        //     }
+        // });
         app.UseSwagger();
         app.UseSwaggerUI(setupAction =>
         {
