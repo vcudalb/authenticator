@@ -28,9 +28,7 @@ public static class IdentityServerServiceCollectionExtensions
     {
         const string infrastructureAssembly = "Authenticator.Infrastructure";
         string connectionString = configuration.GetConnectionString("authenticator");
-        services.AddDbContext<AuthenticatorDbContext>(options =>
-            options.UseSqlServer(connectionString,
-                m => m.MigrationsAssembly(infrastructureAssembly).EnableRetryOnFailure()));
+        services.AddDbContext<AuthenticatorDbContext>(options => options.UseSqlServer(connectionString, m => m.MigrationsAssembly(infrastructureAssembly).EnableRetryOnFailure()));
         services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;

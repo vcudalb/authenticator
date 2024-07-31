@@ -193,6 +193,33 @@
         <member name="M:Authenticator.Api.Swagger.EnumSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
             <inheritdoc/>
         </member>
+        <member name="T:Authenticator.Api.Swagger.OptionsProvider">
+            <summary>
+            Swagger Options Provider, represents an option service provider.
+            </summary>
+        </member>
+        <member name="M:Authenticator.Api.Swagger.OptionsProvider.GetOpenApiSecurityRequirement">
+            <summary>
+            Creates the <see cref="T:Microsoft.OpenApi.Models.OpenApiSecurityRequirement"/> settings for the SwaggerGen registration
+            </summary>
+        </member>
+        <member name="M:Authenticator.Api.Swagger.OptionsProvider.GetOpenApiSecurityScheme">
+            <summary>
+            Creates the <see cref="T:Microsoft.OpenApi.Models.OpenApiSecurityScheme"/> settings for the SwaggerGen registration
+            </summary>
+        </member>
+        <member name="M:Authenticator.Api.Swagger.OptionsProvider.SetApExplorerOptions(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiExplorerOptions)">
+            <summary>
+            Compose the <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiExplorerOptions"/> settings for the SwaggerGen registration
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:Authenticator.Api.Swagger.OptionsProvider.SetSwaggerGenOptions(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)">
+            <summary>
+            Compose the <see cref="T:Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions"/> settings for the SwaggerGen registration
+            </summary>
+            <param name="options"></param>
+        </member>
         <member name="T:Authenticator.Api.Swagger.RemoveVersionOperationFilter">
             <summary>
             An operation filter removing version from parameters
