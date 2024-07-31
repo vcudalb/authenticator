@@ -31,7 +31,7 @@ RUN dotnet build "Authenticator.UnitTests.csproj" --configuration $BUILD_CONFIGU
 RUN dotnet test --logger:trx
 
 #run stage
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 
 EXPOSE 80
 WORKDIR /app
 ENTRYPOINT ["dotnet", "Authenticator.Api.dll"]
